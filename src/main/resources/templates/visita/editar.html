@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${visita.DNIAFILIADO}"></title>
+</head>
+<body>
+
+<h1 th:text="'Editando el registro de  visita: ' + ${visita.DNIAFILIADO}">Pagina Principal de Visitas</h1>
+
+
+<div>
+    <form th:action="@{/visita(ID=${visita.ID})}" th:method="put" th:object="${visita}">
+        <label for="DNIAFILIADO">DNI :</label>
+        <input type="text" id="DNIAFILIADO" name="DNIAFILIADO" th:value="${visita.DNIAFILIADO}"/>
+
+        <label for="FECHA">FECHA :</label>
+        <input type="text" id="FECHA" name="FECHA" th:value="${visita.FECHA}"/>
+
+        <label for="HORA">HORA :</label>
+        <input type="text" id="HORA" name="HORA" th:value="${visita.HORA}"/>
+
+        <label for="LOCAL">LOCAL :</label>
+        <input type="text" id="LOCAL" name="LOCAL" th:value="${visita.LOCAL}"/>
+
+        <input type="submit" value="Actualizar"/>
+        <p th:if="${param.error}">EL DNI PROPORCIONADO NO SE ENCUENTRA DISPONIBLE, INTENTE CON OTRO.</p>
+    </form>
+
+
+</div>
+
+
+</body>
+</html>

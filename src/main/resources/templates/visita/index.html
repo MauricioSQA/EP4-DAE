@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Visitas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+</head>
+<body>
+
+<h1>Registro de Visitas</h1>
+
+<div style="margin:5% ; box-shadow:2px 2px 4px rgba(0,0,0,0.2);">
+    <form th:action="@{/visita}" method="post" th:object="${visita}">
+
+        <div class="mb-3" >
+            <label for="DNIAFILIADO" class="form-label">DNI :</label>
+            <input type="text" id="DNIAFILIADO" name="DNIAFILIADO" class="form-control" required/>
+        </div>
+
+        <div class="mb-3">
+            <label for="FECHA" class="form-label">Fecha :</label>
+            <input type="text" id="FECHA" name="FECHA" class="form-control"required/>
+        </div>
+
+        <div class="mb-3">
+            <label for="HORA" class="form-label">Hora :</label>
+            <input type="text" id="HORA" name="HORA" class="form-control"required/>
+        </div>
+
+        <div class="mb-3">
+            <label for="LOCAL" class="form-label">Local :</label>
+            <input type="text" id="LOCAL" name="LOCAL" class="form-control"required/>
+        </div>
+
+        <div class="mb-3">
+            <button type="submite" class="btn btn-primary">Registrar</button>
+        </div>
+    </form>
+    <p th:if="${param.error}">EL DNI PROPORCIONADO NO SE ENCUENTRA DISPONIBLE, INTENTE CON OTRO.</p>
+
+</div>
+
+
+<div style="margin:5%">
+    <table th:if="${!Visitas.isEmpty()}" class="table table-success table-hover">
+        <thead>
+        <tr>
+            <th>DNI Afiliado</th>
+            <th>Fecha</th>
+            <th>Hora</th>
+            <th>Local</th>
+            <th colspan="2">Opciones</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each=" item : ${Visitas}"  >
+            <td th:text="${item.DNIAFILIADO}"></td>
+            <td th:text="${item.FECHA}"></td>
+            <td th:text="${item.HORA}"></td>
+            <td th:text="${item.LOCAL}"></td>
+            <td>
+                <a th:href="@{/visita/editar(ID=${item.ID})}">
+                    <button><i class="bi bi-arrow-clockwise"></i></button>
+                </a>
+            </td>
+            <td>
+                <form th:action="@{/visita/{ID}(ID=${item.ID})}" th:method="delete" >
+                    <button><i class="bi bi-trash"></i></button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
+</body>
+</html>
